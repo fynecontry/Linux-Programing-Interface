@@ -49,6 +49,7 @@ main(int argc, char *argv[])
     /* Using sigaction() instead signal() as it is the preferred due to portability */
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
+    //sa.sa_handler = SIG_IGN;          /* If we wish to ignore handled signals*/
     sa.sa_handler = handler;
 
     for (n = 1; n < NSIG; n++)          /* Same handler for all signals */

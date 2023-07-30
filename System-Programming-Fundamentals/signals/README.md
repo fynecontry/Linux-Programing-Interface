@@ -37,8 +37,24 @@ $ ./sig_sender 22273 1000000 10 2
 ./sig_sender: exiting
 ```
 
-#### 20-2 `TODO:` Write a program that shows that when the disposition of a pending signal is changed to be `SIG_IGN`, the program never sees (catches) the signal.
+#### 20-2 Write a program that shows that when the disposition of a pending signal is changed to be `SIG_IGN`, the program never sees (catches) the signal.
+> Using existing sig_receiver and sig_sender processes, changing `sa.sa_handler = SIG_IGN;` `SIGSEGV` is never caught.
+
+```
+$ ./sig_receiver 40 &
+[4] 14493
+./sig_receiver: PID is 14493
+./sig_receiver: sleeping for 40 seconds
+$ ./sig_receiver: pending signals are: 
+                2 (Interrupt)
+                11 (Segmentation fault)
+
+$ ./sig_sender 14493 1000000 11 2
+./sig_sender: sending signal 11 to process 14493 1000000 times
+./sig_sender: exiting
+```
 
 #### 20-3 `TODO:` Write programs that verify the effect of the `SA_RESETHAND` and `SA_NODEFER` flags when establishing a signal handler with `sigaction()`.
+
 
 #### 20-4 `TODO:` Implement the `siginterrupt()` function described in Section 21.5 using `sigaction()`.
