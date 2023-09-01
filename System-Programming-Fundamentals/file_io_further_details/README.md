@@ -5,6 +5,8 @@ In the course of this chapter, we introduced the concept of atomicity, which is 
 The `fcntl()` system call performs a variety of file control operations, including changing open file status flags and duplicating file descriptors. Duplicating file descriptors is also possible using `dup()` and `dup2()`.
 
 We looked at the relationship between file descriptors, open file descriptions, and file i-nodes, and noted that different information is associated with each of these three objects. Duplicate file descriptors refer to the same open file description, and thus share open file status flags and the file offset.
+![image](https://github.com/fynecontry/Linux-Programing-Interface/assets/27024731/fd883f52-7c0d-4022-9642-b945912ec22c)
+
 
 ## Exercises
 #### Question 5-2
