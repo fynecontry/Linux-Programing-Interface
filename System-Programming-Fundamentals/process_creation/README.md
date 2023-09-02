@@ -65,4 +65,14 @@ $ ./fork_whos_on_first 6
 5 parent
 ```
 
-24-5. Suppose that in the program in [fork_sig_sync.c](https://github.com/fynecontry/Linux-Programing-Interface/blob/main/System-Programming-Fundamentals/process_creation/fork_sig_sync.c), the child process also needed to wait on the parent to complete some actions. What changes to the program would be required in order to enforce this?
+24-5. Suppose that in the program in [fork_sig_sync_bak.c](https://github.com/fynecontry/Linux-Programing-Interface/blob/main/System-Programming-Fundamentals/process_creation/fork_sig_sync.c), the child process also needed to wait on the parent to complete some actions. What changes to the program would be required in order to enforce this?
+```
+$ ./fork_sig_sync_bak 
+[16:34:49 14730] Parent about to wait for signal
+[16:34:49 14731] Child started - doing some work
+[16:34:51 14731] Child about to signal parent
+[16:34:51 14731] Child then suspends operations, waiting for signal from parent
+[16:34:51 14730] Parent got signal
+[16:34:53 14730] Parent about to send its last signal Child
+[16:34:53 14731] Child received signal to continue
+```

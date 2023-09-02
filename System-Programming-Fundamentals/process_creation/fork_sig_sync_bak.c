@@ -64,8 +64,15 @@ main(int argc, char *argv[])
                 currTime("%T"), (long) getpid());
         if (kill(getppid(), SYNC_SIG) == -1)
             errExit("kill");
+        
+        /* Child suspends operations */
+        printf("[%s %ld] Child then suspends operations, waiting for signal from parent\n",
+                currTime("%T"), (long) getpid());
+        if (sigsuspend(&emptyMask) == -1 && errno != EINTR)
+            errExit("sigsuspend");
 
         /* Now child can do other things... */
+        printf("[%s %ld] Child received signal to continue\n", currTime("%T"), (long) getpid());
 
         _exit(EXIT_SUCCESS);
 
@@ -87,6 +94,11 @@ main(int argc, char *argv[])
             errExit("sigprocmask");
 
         /* Parent carries on to do other things... */
+        sleep(2);               /* Simulate time spent doing some work */
+        printf("[%s %ld] Parent about to send its last signal Child\n",
+                currTime("%T"), (long) getpid());
+        if (kill(childPid, SYNC_SIG) == -1)
+            errExit("kill");
 
         exit(EXIT_SUCCESS);
     }
